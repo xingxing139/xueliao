@@ -1,0 +1,149 @@
+/*第一天~第七天*/
+.toubulan{
+    display: flex;
+    margin: 0px auto;
+    width: 1248px;
+    height: 60px;
+    background-color: aliceblue;
+  }
+  
+  .logo a{
+    display: flex;
+    margin: auto 10px;
+    width: 147px;
+    height: 80px;
+    background-image: url(../images/logo-1.png);
+    background-size: 100%;
+    font-size: 0;
+  }
+  
+  .tiaozhuananniu ul{
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    height: 50px;
+  }
+  
+  .tiaozhuananniu li a{
+    display: inline-block;
+    width: 90px;
+    height: 50px;
+    text-align: center;
+    line-height: 60px;
+    color: #000000;
+  }
+  
+  .tiaozhuananniu li a:hover{
+    border-bottom: 3px solid #0088ff;
+  }
+  
+  .sousuo{
+    display: flex;
+    margin-top: 10px;
+    padding-left: 19px;
+    padding-right: 12px;
+    background-color: #f4f4f4;
+    width: 420px;
+    height: 40px;
+    border-radius: 20px;
+  }
+  
+  .sousuo input{
+    flex: 1;
+    border: 0;
+    background-color: #f4f4f4;
+    outline: none;
+    font-size: 14px;
+  }
+  
+  .sousuo a{
+    align-self: center;
+    width: 16px;
+    height: 16px;
+    background-image: url(../uploads/9349901.png);
+    background-size: 100%;
+  }
+  
+  .touxian{
+    display: flex;
+    width: 100px;
+    height: 60px;
+  }
+  
+  .touxian a{
+    margin-top: 5px;
+    margin-left: 50px;
+    width: 50px;
+    height: 50px;
+    background-image: url(../uploads/photo_2023-09-08_19-27-56.jpg);
+    background-size: 100%;
+    border-radius: 50%;
+  }
+  
+  .gerenzhonxin{
+    display: flex;
+    width: 100px;
+    height: 60px;
+  }
+  
+  .gerenzhonxin a{
+    margin-top: 5px;
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+    background-image: url(../uploads/9350010.png);
+    background-size: 100%;
+    font-size: 0;
+  }
+  
+  .conxinjiazai{
+    margin-top: 5px;
+    display: flex;
+    width: 100px;
+    height: 60px;
+  }
+  
+  .conxinjiazai a{
+    margin-top: 5px;
+    margin-left: 20px;
+    width: 40px;
+    height: 40px;
+    background-image: url(../uploads/9349936.png);
+    background-size: 100%;
+    font-size: 0;
+  }
+
+  .nrqy{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 1224px;
+    height: 700px;
+    background-color: #ffffff;
+  }
+
+  .dytddqt{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tian{
+    margin-top: 30px;
+    width: 300px;
+    height: 60px;
+    background-color: #0088ff;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 60px;
+  }
+
+  .tian a{
+    color: #ffffff;
+    font-size: 25px;
+  }
+
+  .tian a:hover{
+    color: #000000;
+  }
+  

@@ -1,0 +1,72 @@
+.neiron{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    width: 1224px;
+    height: 800px;
+    background-color: #ffff;
+    border-radius: 20px;
+}
+
+.neiron h1{
+    padding-top: 20px;
+    font-size: 40px;
+    text-align: center;
+    color: #3d3d3d;
+}
+
+.neiron ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+.neiron ul li{
+    text-align: center;
+    margin-top: 60px;
+    width: 400px;
+    height: 600px;
+    background-color: #cacaca;
+    border-radius: 20px;
+}
+
+.neiron ul li .box1{
+    width: 400px;
+    height: 400px;
+    background-image: url(../uploads/photo_2023-09-08_19-27-56.jpg);
+    background-size: 100%;
+    border-radius: 20px 20px 0px 0px;
+
+}
+
+.neiron ul li .box2{
+    width: 400px;
+    height: 400px;
+    background-image: url(../uploads/photo_2023-07-29_02-35-18.jpg);
+    background-size: 100%;
+    border-radius: 20px 20px 0px 0px;
+
+}
+
+.neiron ul li h2{
+    padding-top: 20px;
+    color: #3d3d3d;
+    text-align: center;
+}
+
+.neiron ul li a{
+    margin-top: 50px;
+    display: inline-block;
+    text-align: center;
+    width: 150px;
+    height: 50px;
+    background-color: black;
+    line-height: 50px;
+    font-size: 20px;
+    border-radius: 20px;
+    color: #ffffff;
+}
+
+.neiron ul li a:hover{
+    background-color: #ffffff;
+    color: #000;
+}
