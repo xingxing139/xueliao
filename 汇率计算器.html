@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investment Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .calculator {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .input-group {
+        margin-bottom: 20px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    select, input[type="number"], input[type="range"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 5px;
+    }
+    .result {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+<div class="calculator">
+    <div class="input-group">
+        <label for="numInvestments">选择投资笔数:</label>
+        <select id="numInvestments">
+            <option value="3">3 笔</option>
+            <option value="4">4 笔</option>
+            <option value="5">5 笔</option>
+            <option value="6">6 笔</option>
+            <option value="7">7 笔</option>
+            <option value="8">8 笔</option>
+        </select>
+    </div>
+    <div class="input-group">
+        <label for="principal">本金:</label>
+        <input type="number" id="principal" placeholder="请输入本金">
+    </div>
+    <div class="input-group">
+        <label for="profitRange">选择利润范围:</label>
+        <input type="range" id="profitRange" min="10" max="60" value="30">
+        <output id="profitOutput">30%</output>
+    </div>
+    <button onclick="calculateInvestments()">计算</button>
+    <div class="result" id="result"></div>
+</div>
+<script>
+function calculateInvestments() {
+    const numInvestments = parseInt(document.getElementById('numInvestments').value);
+    const principal = parseFloat(document.getElementById('principal').value);
+    const profitPercent = parseFloat(document.getElementById('profitRange').value);
+    const profitFactor = 1 + profitPercent / 100;
+
+    let totalInvested = 0;
+    let resultHtml = '<p>每笔投资金额:</p>';
+    const investmentAmounts = getRandomInvestmentAmounts(numInvestments, principal);
+    for (let i = 0; i < numInvestments; i++) {
+        const investmentWithProfit = investmentAmounts[i] * profitFactor;
+        totalInvested += investmentWithProfit;
+        resultHtml += `<p>第 ${i + 1} 笔投资: ${investmentWithProfit.toFixed(2)}</p>`;
+    }
+
+    const totalProfit = totalInvested - principal;
+    resultHtml += `<p>总投资金额: ${totalInvested.toFixed(2)}</p>`;
+    resultHtml += `<p>总利润: ${totalProfit.toFixed(2)}</p>`;
+
+    document.getElementById('result').innerHTML = resultHtml;
+}
+
+function getRandomInvestmentAmounts(numInvestments, principal) {
+    const investmentAmounts = [];
+    let remainingPrincipal = principal;
+    for (let i = 0; i < numInvestments - 1; i++) {
+        const maxAmount = remainingPrincipal - (numInvestments - i - 1); // Ensure each investment is at least 1
+        const amount = Math.floor(Math.random() * maxAmount) + 1;
+        investmentAmounts.push(amount);
+        remainingPrincipal -= amount;
+    }
+    investmentAmounts.push(remainingPrincipal); // Last investment takes remaining principal
+    return investmentAmounts;
+}
+
+document.getElementById('profitRange').addEventListener('input', function() {
+    document.getElementById('profitOutput').textContent = this.value + '%';
+});
+</script>
+</body>
+</html>

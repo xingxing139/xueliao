@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据记录表格</title>
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .dataRecord {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>数据记录表格</h2>
+        <button id="addUserBtn">添加用户</button>
+        <button id="deleteAllDataBtn">删除所有数据</button>
+
+        <div id="userForms">
+            <!-- 用户表单将在此显示 -->
+        </div>
+
+        <div id="dataDisplay">
+            <!-- 数据将在此显示 -->
+        </div>
+
+        <!-- 删除用户表单 -->
+        <form id="deleteUserForm" style="display: none;">
+            <label for="deletePassword">密码：</label>
+            <input type="password" id="deletePassword" required>
+            <button type="button" id="confirmDeleteBtn">确认删除</button>
+        </form>
+
+        <!-- 上传数据表单 -->
+        <form id="uploadDataForm" style="display: none;">
+            <label for="uploadPassword">密码：</label>
+            <input type="password" id="uploadPassword" required>
+            <button type="button" id="confirmUploadBtn">确认上传</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userForms = document.getElementById('userForms');
+            const dataDisplay = document.getElementById('dataDisplay');
+            const addUserBtn = document.getElementById('addUserBtn');
+            const deleteAllDataBtn = document.getElementById('deleteAllDataBtn');
+            const deleteUserForm = document.getElementById('deleteUserForm');
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            const uploadDataForm = document.getElementById('uploadDataForm');
+            const confirmUploadBtn = document.getElementById('confirmUploadBtn');
+            const storageKey = 'dataRecords';
+            let dataRecords = JSON.parse(localStorage.getItem(storageKey)) || {};
+
+            // 添加用户按钮点击事件监听器
+            addUserBtn.addEventListener('click', function() {
+                const userName = prompt('请输入你的姓名：');
+                if (userName) {
+                    createUser(userName);
+                }
+            });
+
+            // 创建用户
+            function createUser(userName) {
+                const dataForm = document.createElement('form');
+                dataForm.classList.add('dataForm');
+                dataForm.innerHTML = `
+                    <label for="name">姓名：</label>
+                    <input type="text" class="name" value="${userName}" readonly required>
+                    <label for="today">今日新增：</label>
+                    <input type="number" class="today" min="0" required>
+                    <label for="todayIncome">今日入金：</label>
+                    <input type="number" class="todayIncome" min="0" required>
+                    <button type="button" class="submitBtn">提交</button>
+                    <button type="button" class="deleteBtn">删除用户</button>
+                `;
+                userForms.appendChild(dataForm);
+
+                // 提交按钮点击事件监听器
+                const submitBtn = dataForm.querySelector('.submitBtn');
+                submitBtn.addEventListener('click', function() {
+                    const name = userName;
+                    const today = parseInt(dataForm.querySelector('.today').value);
+                    const todayIncome = parseInt(dataForm.querySelector('.todayIncome').value);
+                    const total = (dataRecords[name] ? dataRecords[name].total : 0) + todayIncome;
+
+                    dataRecords[name] = {
+                        name: name,
+                        today: today,
+                        total: total
+                    };
+
+                    localStorage.setItem(storageKey, JSON.stringify(dataRecords));
+                    displayData();
+                    dataForm.reset();
+                });
+
+                // 删除按钮点击事件监听器
+                const deleteBtn = dataForm.querySelector('.deleteBtn');
+                deleteBtn.addEventListener('click', function() {
+                    const deletePassword = prompt('请输入删除密码：');
+                    const correctPassword = 'xx139506'; // 更改为您的密码
+                    if (deletePassword === correctPassword) {
+                        delete dataRecords[userName];
+                        localStorage.setItem(storageKey, JSON.stringify(dataRecords));
+                        displayData();
+                        dataForm.parentNode.removeChild(dataForm);
+                        alert('用户已删除！');
+                    } else {
+                        alert('密码错误，无法删除用户！');
+                    }
+                });
+            }
+
+            // 显示数据
+            function displayData() {
+                dataDisplay.innerHTML = '';
+                for (const name in dataRecords) {
+                    if (dataRecords.hasOwnProperty(name)) {
+                        const record = dataRecords[name];
+                        const div = document.createElement('div');
+                        div.classList.add('dataRecord');
+                        div.innerHTML += `<p>姓名：${name}，总入金：${record.total}</p>`;
+                        dataDisplay.appendChild(div);
+                    }
+                }
+            }
+
+            // 删除所有数据按钮点击事件监听器
+            deleteAllDataBtn.addEventListener('click', function() {
+                const deletePassword = prompt('请输入删除密码：');
+                const correctPassword = 'xx139506'; // 更改为您的密码
+                if (deletePassword === correctPassword) {
+                    localStorage.removeItem(storageKey);
+                    dataRecords = {};
+                    displayData();
+                    userForms.innerHTML = ''; // 删除所有用户表单
+                    alert('数据已清除！');
+                } else {
+                    alert('密码错误，无法删除数据！');
+                }
+            });
+
+            // 删除用户按钮点击事件监听器
+            confirmDeleteBtn.addEventListener('click', function() {
+                const deletePassword = document.getElementById('deletePassword').value;
+                const correctPassword = 'xx139506'; // 更改为您的密码
+                if (deletePassword === correctPassword) {
+                    localStorage.removeItem(storageKey);
+                    dataRecords = {};
+                    displayData();
+                    userForms.innerHTML = ''; // 删除所有用户表单
+                    alert('数据已清除！');
+                } else {
+                    alert('密码错误，无法删除数据！');
+                }
+                document.getElementById('deletePassword').value = '';
+                deleteUserForm.style.display = 'none';
+            });
+
+            // 上传数据按钮点击事件监听器
+            confirmUploadBtn.addEventListener('click', function() {
+                const uploadPassword = document.getElementById('uploadPassword').value;
+                const correctPassword = 'xx139506'; // 更改为您的密码
+                if (uploadPassword === correctPassword) {
+                    // 在此处编写上传数据的逻辑
+                    alert('数据已上传！');
+                } else {
+                    alert('密码错误，无法上传数据！');
+                }
+                document.getElementById('uploadPassword').value = '';
+                uploadDataForm.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

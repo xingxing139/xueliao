@@ -5,15 +5,15 @@
   margin: 0px auto;
   width: 1248px;
   height: 60px;
-  background-color: rgb(100, 100, 100);
+  background-color: aliceblue;
 }
 
 .logo a{
   display: flex;
   margin: auto 10px;
-  width: 160px;
-  height: 60px;
-  background-image: url(../images/images.jpg);
+  width: 147px;
+  height: 80px;
+  background-image: url(../images/logo-1.png);
   background-size: 100%;
   font-size: 0;
 }
@@ -31,7 +31,7 @@
   height: 50px;
   text-align: center;
   line-height: 60px;
-  color: rgb(255, 255, 255);
+  color: #000000;
 }
 
 .tiaozhuananniu li a:hover{
@@ -125,7 +125,7 @@
   margin: 0 auto;
   width: 1248px;
   height: 423px;
-  background-image: url(../uploads/istockphoto-1419117748-1024x1024.jpg);
+  background-image: url(../uploads/forest-4824759_1280.webp);
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -175,7 +175,7 @@
 .xuexilan dl dt{
   width: 228px;
   height: 48px;
-  background-color: rgb(100, 100, 100);
+  background-color: #0088ff;
   line-height: 48px;
 }
 
@@ -273,7 +273,6 @@ h1:hover {
 }
 
 .box .box1{
-  border-radius: 20px;
   width: 228px;
   height: 270px;
   background-color: #ffffff;
@@ -285,7 +284,6 @@ h1:hover {
   background-image: url(../uploads/pic.png);
   background-size: 100%;
   background-repeat: no-repeat;
-  border-radius: 20px 20px 0px 0px;
 }
 
 .box1 h3{
@@ -314,22 +312,20 @@ h1:hover {
 .dibulan{
   width: auto;
   height: 240px;
-  background-color: rgb(100, 100, 100);
+  background-color: #ffffff;
 }
 
 .dibulan1{
   margin: 0 auto;
+  width: 1248px;
   height: 240px;
-  background-color: #dddfff;
+  background-color: #ffffff;
 }
 
 .dibulan1 div{
-  display: inline-block;
-  margin-top: 10px;
-  margin-left: 10px;
   width: 195px;
   height: 80px;
-  background-image: url(../images/images.jpg);
+  background-image: url(../images/logo-1.png);
   background-repeat: no-repeat;
   background-size: 100%;
 }
